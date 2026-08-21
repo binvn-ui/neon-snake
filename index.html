@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Snake - Security Challenge</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background-color: #0b0f19;
+            color: #00f3ff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Khung hiển thị điểm */
+        .score-board {
+            font-size: 16px;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            color: #00f3ff;
+            text-shadow: 0 0 5px rgba(0, 243, 255, 0.5);
+        }
+
+        .score-value {
+            border: 1px solid #00f3ff;
+            padding: 2px 8px;
+            display: inline-block;
+            background: rgba(0, 243, 255, 0.05);
+        }
+
+        /* Khung game chính */
+        .game-container {
+            width: 340px;
+            height: 380px;
+            border: 2px solid #00f3ff;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3), inset 0 0 20px rgba(0, 243, 255, 0.1);
+            background: rgba(5, 10, 20, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* Chấm đỏ giả lập trong game */
+        .dot {
+            width: 8px;
+            height: 8px;
+            background-color: #ff0055;
+            box-shadow: 0 0 8px #ff0055;
+            border-radius: 50%;
+            position: absolute;
+            top: 25px;
+            left: 25px;
+        }
+
+        h1 {
+            font-size: 22px;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.6);
+        }
+
+        p {
+            font-size: 13px;
+            color: #a5f3fc;
+            margin-bottom: 25px;
+        }
+
+        /* Nút PLAY */
+        .play-btn {
+            background: transparent;
+            color: #00f3ff;
+            border: 2px solid #00f3ff;
+            padding: 10px 35px;
+            font-size: 16px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.4);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .play-btn:hover {
+            background: #00f3ff;
+            color: #0b0f19;
+            box-shadow: 0 0 20px #00f3ff;
+        }
+
+        /* Cụm phím điều hướng giả lập bên dưới */
+        .d-pad {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .d-row {
+            display: flex;
+            gap: 4px;
+        }
+
+        .d-btn {
+            width: 36px;
+            height: 32px;
+            background: rgba(0, 243, 255, 0.08);
+            border: 1px solid #00f3ff;
+            border-radius: 6px;
+            color: #00f3ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            box-shadow: 0 0 5px rgba(0, 243, 255, 0.2);
+        }
+
+        /* Khu vực hiển thị widget xác thực của Cloudflare nếu cần */
+        .cf-widget-container {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Điểm số -->
+    <div class="score-board">
+        Score: <span class="score-value">Ø</span>
+    </div>
+
+    <!-- Khung chính Neon Snake -->
+    <div class="game-container">
+        <div class="dot"></div>
+        
+        <h1>NEON SNAKE</h1>
+        <p>Bạn không có quyền truy cập!</p>
+
+        <!-- Nút Play hoặc chỗ để tích hợp Cloudflare challenge -->
+        <button class="play-btn" id="playBtn">PLAY</button>
+
+        <!-- Thẻ bắt buộc của Cloudflare để hiển thị bảng check mã độc/captcha -->
+        <div class="cf-widget-container">
+            ::CF_WIDGET_BOX::
+        </div>
+    </div>
+
+    <!-- Cụm điều hướng trang trí -->
+    <div class="d-pad">
+        <div class="d-row">
+            <div class="d-btn">▲</div>
+        </div>
+        <div class="d-row">
+            <div class="d-btn">◀</div>
+            <div class="d-btn">▼</div>
+            <div class="d-btn">▶</div>
+        </div>
+    </div>
+
+    <script>
+        // Xử lý sự kiện phụ trợ cho nút PLAY (nếu cần tương tác kích hoạt kiểm tra lại)
+        document.getElementById('playBtn').addEventListener('click', function() {
+            // Khi người dùng bấm Play, có thể reload lại trang để hệ thống check lại IP
+            location.reload();
+        });
+    </script>
+</body>
+</html>
